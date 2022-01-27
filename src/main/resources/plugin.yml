@@ -1,0 +1,6 @@
+name: TPPOS
+version: '${project.version}'
+main: com.starandq.plugin.tppos.TPPOS
+api-version: 1.18
+commands:
+  market: {}
