@@ -1,0 +1,10 @@
+messages:
+  usage: 'Please use correct command "/tppos [x] [y] [z]."'
+  noAccess: 'You have no access for this command.'
+  noPermission: 'You have no permission for this command.'
+  cancel: 'json:["",{"text":"[Cancel] ","color":"gold","clickEvent":{"action":"run_command","value":"/tppos cancel"},
+    "hoverEvent":{"action":"show_text","contents":[]}},"Cancel teleportation."]'
+  impossible: 'Teleportation is impossible.'
+  successful: 'Teleportation was successful to [{x}], [{y}], [{z}].'
+  reloaded: 'Config reloaded.'
+  teleportedBack: 'You was teleported back to the previous position [{x}], [{y}], [{z}].'

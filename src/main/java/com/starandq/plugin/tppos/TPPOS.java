@@ -17,7 +17,9 @@ public final class TPPOS extends JavaPlugin {
     @Override
     public void onEnable() {
        instance = this;
+       Message.load(getConfig());
         new TPPOSCommand();
+        saveDefaultConfig();
     }
 
     @Override
