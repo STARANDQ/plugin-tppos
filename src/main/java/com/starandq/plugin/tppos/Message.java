@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public enum Message {
-    noPermission,usage,cancel,impossibleY, successful, noAccess, reloaded, teleportedBack;
+    noPermission,usage,cancel,impossibleY, successful, noAccess, reloaded, teleportedBack, teleportedOnSurface;
 
     private List<String> msg;
 
@@ -50,6 +50,8 @@ public enum Message {
             return this;
         }
         private void sendMessage(CommandSender player, String message){
+            message = getColor(message);
+
             if(message.startsWith("json:")) {
                 player.sendMessage(new TextComponent(ComponentSerializer.parse(message.substring(5))));
             }
@@ -64,6 +66,40 @@ public enum Message {
             }
             return message;
         }
+
+        private String getColor(String text){
+            String result = "";
+
+            for (int i = 0; i < text.length(); i++) {
+                if(text.charAt(i) == '&'){
+                    i++;
+                    if(text.charAt(i) == '1') result += ChatColor.DARK_BLUE;
+                    else if(text.charAt(i) == '2') result += ChatColor.DARK_GREEN;
+                    else if(text.charAt(i) == '3') result += ChatColor.DARK_AQUA;
+                    else if(text.charAt(i) == '4') result += ChatColor.DARK_RED;
+                    else if(text.charAt(i) == '5') result += ChatColor.DARK_PURPLE;
+                    else if(text.charAt(i) == '6') result += ChatColor.GOLD;
+                    else if(text.charAt(i) == '7') result += ChatColor.GRAY;
+                    else if(text.charAt(i) == '8') result += ChatColor.DARK_GRAY;
+                    else if(text.charAt(i) == '9') result += ChatColor.BLUE;
+                    else if(text.charAt(i) == 'a') result += ChatColor.GREEN;
+                    else if(text.charAt(i) == 'b') result += ChatColor.AQUA;
+                    else if(text.charAt(i) == 'c') result += ChatColor.RED;
+                    else if(text.charAt(i) == 'd') result += ChatColor.LIGHT_PURPLE;
+                    else if(text.charAt(i) == 'e') result += ChatColor.YELLOW;
+                    else if(text.charAt(i) == 'f') result += ChatColor.WHITE;
+                    else {
+                        i--;
+                        result+="&";
+                    }
+                }else {
+                    result += text.charAt(i);
+                }
+            }
+
+            return result;
+        }
     }
+
 
 }

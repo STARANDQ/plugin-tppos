@@ -8,3 +8,7 @@ messages:
   successful: 'Teleportation was successful to [{x}], [{y}], [{z}].'
   reloaded: 'Config reloaded.'
   teleportedBack: 'You was teleported back to the previous position [{x}], [{y}], [{z}].'
+  teleportedOnSurface: 'You was teleported on [{y}] blocks upper '
+
+
+
