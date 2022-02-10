@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public enum Message {
-    noPermission,usage,cancel,impossibleY, successful, noAccess, reloaded, teleportedBack, teleportedOnSurface;
+    noPermission,usage,cancel, impossibleY, impossible, successful, noAccess, reloaded, teleportedBack, teleportedOnSurface;
 
     private List<String> msg;
 
@@ -59,7 +59,6 @@ public enum Message {
         }
 
         private String replacePlaceholders(String message){
-            message = ChatColor.translateAlternateColorCodes('6',message);
             if(!message.contains("{")) return message;
             for(Map.Entry<String, String> entry : placeholder.entrySet()){
                 message = message.replace(entry.getKey(), entry.getValue());

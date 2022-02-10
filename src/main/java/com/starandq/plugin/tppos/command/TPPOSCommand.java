@@ -59,7 +59,9 @@ public class TPPOSCommand extends AbstractCommand{
     @Override
     public void execute(CommandSender sender, String label, String[] args) {
         Player player = (Player) sender;
-        if (getPermissions(player) || player.isOp()) {
+        User user = api.getUserManager().getUser(player.getUniqueId());
+        PermissionNode node = PermissionNode.builder("tppos.permission").build();
+        if (player.hasPermission("tppos.permission") || player.isOp()) {
             if (args.length == 0) {
                 if (!(sender instanceof Player)) {
                     Message.noAccess.send(sender);
@@ -109,7 +111,6 @@ public class TPPOSCommand extends AbstractCommand{
                                 Message.successful.replace("{x}", String.valueOf(desirableX)).replace("{y}",
                                         String.valueOf(desirableY--)).
                                         replace("{z}", String.valueOf(desirableZ)).send(sender);
-
                                 Message.teleportedOnSurface.replace("{y}",String.valueOf(desirableY-coordY)).send(sender);
                                 break;
 
@@ -118,10 +119,9 @@ public class TPPOSCommand extends AbstractCommand{
                     }
                     return;
                 } else {
-                    Message.impossibleY.send(sender);
+                    Message.impossible.send(sender);
                     return;
                 }
-
 
                 //sender.sendMessage(desirableX + "   " + desirableY + "   "+ desirableZ);
 
@@ -135,7 +135,6 @@ public class TPPOSCommand extends AbstractCommand{
                         replace("{z}", String.valueOf(Math.round(getPrimaryZ()))).send(sender);
                 return;
             }
-
 
             if (args[0].equalsIgnoreCase("reload")) {
                 if (!sender.hasPermission("tppos.reload")) {
@@ -156,28 +155,6 @@ public class TPPOSCommand extends AbstractCommand{
     public List<String> complete(CommandSender sender, String[] args) {
         if(args.length == 1) return Lists.newArrayList("reload", "cancel");
         return Lists.newArrayList();
-    }
-    private boolean getPermissions(Player player){
-        User user = api.getUserManager().getUser(player.getUniqueId());
-        PermissionNode node = PermissionNode.builder("tppos.permission").build();
-        //user.getPrimaryGroup();
-        Collection<Node> nodes =  user.getNodes();
-        ArrayList<String> perms= new ArrayList<>();
-        ArrayList<String> matches = new ArrayList<>();
-        String regex = "group.[a-z].tppos.permission";
-        Pattern p = Pattern.compile(regex);
-        for (Node n:nodes
-        ) {
-            perms.add(n.toString());
-        }
-        for (String s:perms) {
-            if (p.matcher(s).matches()) {
-                matches.add(s);
-            }
-        }
-        if(matches!=null)
-            return true;
-        return false;
     }
 
 }
